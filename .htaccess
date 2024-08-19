@@ -1,0 +1,23 @@
+
+php_value display_errors On
+php_value mbstring.http_input auto
+php_value date.timezone Asia/Tbilisi
+
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [L]
+
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/index\.php[/?\s] [NC]
+RewriteRule ^index\.php$ / [R=301,L]
+
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/index\.php/(.*)\s [NC]
+RewriteRule ^index\.php/(.*)$ /$1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ $1.php [L]
